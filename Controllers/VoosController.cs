@@ -25,10 +25,11 @@ namespace AndreAirlinesAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Voo>>> GetVoo()
         {
-            return await _context.Voo.Include("SiglaDestino").
-                Include("SiglaOrigem").
-                Include("Codigo").
-                Include("CPF").
+            return await _context.Voo
+               .Include(sd => sd.SiglaDestino).Include(ed => ed.SiglaDestino.Endereco).
+                Include(so => so.SiglaOrigem).Include(ed => ed.SiglaOrigem.Endereco).
+                Include(ca => ca.CodigoAeronave).
+                Include(c => c.CPF).Include(ed => ed.CPF.Endereco).
                 ToListAsync();
         }
 
@@ -36,7 +37,7 @@ namespace AndreAirlinesAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Voo>> GetVoo(int id)
         {
-            var voo = await _context.Voo.Include(a => a.CodigoAeronave).Include(sd => sd.SiglaDestino).Include(so => so.SiglaOrigem).Include(c => c.CPF).Where(c => c.ID == id).FirstOrDefaultAsync();
+            var voo = await _context.Voo.Include(sd => sd.SiglaDestino).Include(so => so.SiglaOrigem).Include(a => a.CodigoAeronave).Include(c => c.CPF).Where(c => c.ID == id).FirstOrDefaultAsync();
 
             if (voo == null)
             {

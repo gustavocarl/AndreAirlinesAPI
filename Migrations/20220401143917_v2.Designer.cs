@@ -4,14 +4,16 @@ using AndreAirlinesAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AndreAirlinesAPI.Migrations
 {
     [DbContext(typeof(AndreAirlinesAPIContext))]
-    partial class AndreAirlinesAPIContextModelSnapshot : ModelSnapshot
+    [Migration("20220401143917_v2")]
+    partial class v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,6 +131,9 @@ namespace AndreAirlinesAPI.Migrations
                     b.Property<string>("CodigoAeronaveCodigo")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int?>("EnderecoID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("HorarioDesembarque")
                         .HasColumnType("datetime2");
 
@@ -146,6 +151,8 @@ namespace AndreAirlinesAPI.Migrations
                     b.HasIndex("CPF1");
 
                     b.HasIndex("CodigoAeronaveCodigo");
+
+                    b.HasIndex("EnderecoID");
 
                     b.HasIndex("SiglaDestinoSigla");
 
@@ -182,6 +189,10 @@ namespace AndreAirlinesAPI.Migrations
                         .WithMany()
                         .HasForeignKey("CodigoAeronaveCodigo");
 
+                    b.HasOne("AndreAirlinesAPI.Model.Endereco", "Endereco")
+                        .WithMany()
+                        .HasForeignKey("EnderecoID");
+
                     b.HasOne("AndreAirlinesAPI.Model.Aeroporto", "SiglaDestino")
                         .WithMany()
                         .HasForeignKey("SiglaDestinoSigla");
@@ -193,6 +204,8 @@ namespace AndreAirlinesAPI.Migrations
                     b.Navigation("CodigoAeronave");
 
                     b.Navigation("CPF");
+
+                    b.Navigation("Endereco");
 
                     b.Navigation("SiglaDestino");
 

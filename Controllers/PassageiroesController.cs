@@ -30,9 +30,12 @@ namespace AndreAirlinesAPI.Controllers
 
         // GET: api/Passageiroes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Passageiro>> GetPassageiro(string id)
+        public async Task<ActionResult<Passageiro>> GetPassageiro(int id)
         {
-            var passageiro = await _context.Passageiro.Include(e => e.Endereco).Where(c => c.CPF == id).FirstOrDefaultAsync();
+            var passageiro = await _context.Passageiro.Include(e => e.Endereco).FirstOrDefaultAsync();
+
+            //var address = _context.Endereco.Where(x => x.ID == passageiro.EnderecoID).FirstOrDefaultAsync();
+            //Endereco Id = address;
 
             if (passageiro == null)
             {
@@ -78,7 +81,9 @@ namespace AndreAirlinesAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Passageiro>> PostPassageiro(Passageiro passageiro)
         {
+
             _context.Passageiro.Add(passageiro);
+
             try
             {
                 await _context.SaveChangesAsync();

@@ -10,8 +10,6 @@ namespace AndreAirlinesAPI.Model
         [Key]
         public string Sigla { get; set; }
         public string Nome { get; set; }
-        public int EnderecoID { get; set; }
-        [ForeignKey("EnderecoID")]
         public virtual Endereco Endereco { get; set; }
 
         #endregion

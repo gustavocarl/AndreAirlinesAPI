@@ -30,7 +30,7 @@ namespace AndreAirlinesAPI.Controllers
 
         // GET: api/Enderecoes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Endereco>> GetEndereco(string id)
+        public async Task<ActionResult<Endereco>> GetEndereco(int id)
         {
             var endereco = await _context.Endereco.FindAsync(id);
 

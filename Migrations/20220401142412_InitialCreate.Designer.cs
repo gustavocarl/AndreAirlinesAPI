@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AndreAirlinesAPI.Migrations
 {
     [DbContext(typeof(AndreAirlinesAPIContext))]
-    [Migration("20220401015208_InitialCreate")]
+    [Migration("20220401142412_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace AndreAirlinesAPI.Migrations
                     b.Property<string>("Sigla")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("EnderecoID")
+                    b.Property<int?>("EnderecoID")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -102,7 +102,7 @@ namespace AndreAirlinesAPI.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EnderecoID")
+                    b.Property<int?>("EnderecoID")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -128,7 +128,7 @@ namespace AndreAirlinesAPI.Migrations
                     b.Property<string>("CPF1")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Codigo1")
+                    b.Property<string>("CodigoAeronaveCodigo")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("HorarioDesembarque")
@@ -147,7 +147,7 @@ namespace AndreAirlinesAPI.Migrations
 
                     b.HasIndex("CPF1");
 
-                    b.HasIndex("Codigo1");
+                    b.HasIndex("CodigoAeronaveCodigo");
 
                     b.HasIndex("SiglaDestinoSigla");
 
@@ -160,9 +160,7 @@ namespace AndreAirlinesAPI.Migrations
                 {
                     b.HasOne("AndreAirlinesAPI.Model.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("EnderecoID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EnderecoID");
 
                     b.Navigation("Endereco");
                 });
@@ -171,9 +169,7 @@ namespace AndreAirlinesAPI.Migrations
                 {
                     b.HasOne("AndreAirlinesAPI.Model.Endereco", "Endereco")
                         .WithMany()
-                        .HasForeignKey("EnderecoID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EnderecoID");
 
                     b.Navigation("Endereco");
                 });
@@ -184,9 +180,9 @@ namespace AndreAirlinesAPI.Migrations
                         .WithMany()
                         .HasForeignKey("CPF1");
 
-                    b.HasOne("AndreAirlinesAPI.Model.Aeronave", "Codigo")
+                    b.HasOne("AndreAirlinesAPI.Model.Aeronave", "CodigoAeronave")
                         .WithMany()
-                        .HasForeignKey("Codigo1");
+                        .HasForeignKey("CodigoAeronaveCodigo");
 
                     b.HasOne("AndreAirlinesAPI.Model.Aeroporto", "SiglaDestino")
                         .WithMany()
@@ -196,7 +192,7 @@ namespace AndreAirlinesAPI.Migrations
                         .WithMany()
                         .HasForeignKey("SiglaOrigemSigla");
 
-                    b.Navigation("Codigo");
+                    b.Navigation("CodigoAeronave");
 
                     b.Navigation("CPF");
 

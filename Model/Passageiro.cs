@@ -14,9 +14,7 @@ namespace AndreAirlinesAPI.Model
         public string Telefone { get; set; }
         public DateTime DataNascimento { get; set; }
         public string Email { get; set; }
-        [ForeignKey("EnderecoID")]
-        public int EnderecoID { get; set; }
-        public virtual Endereco Endereco { get; set; }
+        public Endereco Endereco { get; set; }
 
         #endregion
     }

@@ -46,7 +46,7 @@ namespace AndreAirlinesAPI.Migrations
                 {
                     Sigla = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EnderecoID = table.Column<int>(type: "int", nullable: false)
+                    EnderecoID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,7 +56,7 @@ namespace AndreAirlinesAPI.Migrations
                         column: x => x.EnderecoID,
                         principalTable: "Endereco",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -68,7 +68,7 @@ namespace AndreAirlinesAPI.Migrations
                     Telefone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EnderecoID = table.Column<int>(type: "int", nullable: false)
+                    EnderecoID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,7 +78,7 @@ namespace AndreAirlinesAPI.Migrations
                         column: x => x.EnderecoID,
                         principalTable: "Endereco",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,7 +89,7 @@ namespace AndreAirlinesAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SiglaDestinoSigla = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     SiglaOrigemSigla = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Codigo1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CodigoAeronaveCodigo = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     HorarioEmbarque = table.Column<DateTime>(type: "datetime2", nullable: false),
                     HorarioDesembarque = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CPF1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
@@ -98,8 +98,8 @@ namespace AndreAirlinesAPI.Migrations
                 {
                     table.PrimaryKey("PK_Voo", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Voo_Aeronave_Codigo1",
-                        column: x => x.Codigo1,
+                        name: "FK_Voo_Aeronave_CodigoAeronaveCodigo",
+                        column: x => x.CodigoAeronaveCodigo,
                         principalTable: "Aeronave",
                         principalColumn: "Codigo",
                         onDelete: ReferentialAction.Restrict);
@@ -134,9 +134,9 @@ namespace AndreAirlinesAPI.Migrations
                 column: "EnderecoID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Voo_Codigo1",
+                name: "IX_Voo_CodigoAeronaveCodigo",
                 table: "Voo",
-                column: "Codigo1");
+                column: "CodigoAeronaveCodigo");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Voo_CPF1",
