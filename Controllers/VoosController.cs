@@ -12,47 +12,51 @@ namespace AndreAirlinesAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EnderecoesController : ControllerBase
+    public class VoosController : ControllerBase
     {
         private readonly AndreAirlinesAPIContext _context;
 
-        public EnderecoesController(AndreAirlinesAPIContext context)
+        public VoosController(AndreAirlinesAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Enderecoes
+        // GET: api/Voos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Endereco>>> GetEndereco()
+        public async Task<ActionResult<IEnumerable<Voo>>> GetVoo()
         {
-            return await _context.Endereco.ToListAsync();
+            return await _context.Voo.Include("SiglaDestino").
+                Include("SiglaOrigem").
+                Include("Codigo").
+                Include("CPF").
+                ToListAsync();
         }
 
-        // GET: api/Enderecoes/5
+        // GET: api/Voos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Endereco>> GetEndereco(string id)
+        public async Task<ActionResult<Voo>> GetVoo(int id)
         {
-            var endereco = await _context.Endereco.FindAsync(id);
+            var voo = await _context.Voo.Include(a => a.CodigoAeronave).Include(sd => sd.SiglaDestino).Include(so => so.SiglaOrigem).Include(c => c.CPF).Where(c => c.ID == id).FirstOrDefaultAsync();
 
-            if (endereco == null)
+            if (voo == null)
             {
                 return NotFound();
             }
 
-            return endereco;
+            return voo;
         }
 
-        // PUT: api/Enderecoes/5
+        // PUT: api/Voos/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEndereco(int id, Endereco endereco)
+        public async Task<IActionResult> PutVoo(int id, Voo voo)
         {
-            if (id != endereco.ID)
+            if (id != voo.ID)
             {
                 return BadRequest();
             }
 
-            _context.Entry(endereco).State = EntityState.Modified;
+            _context.Entry(voo).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +64,7 @@ namespace AndreAirlinesAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EnderecoExists(id))
+                if (!VooExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +77,36 @@ namespace AndreAirlinesAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Enderecoes
+        // POST: api/Voos
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Endereco>> PostEndereco(Endereco endereco)
+        public async Task<ActionResult<Voo>> PostVoo(Voo voo)
         {
-            _context.Endereco.Add(endereco);
+            _context.Voo.Add(voo);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEndereco", new { id = endereco.ID }, endereco);
+            return CreatedAtAction("GetVoo", new { id = voo.ID }, voo);
         }
 
-        // DELETE: api/Enderecoes/5
+        // DELETE: api/Voos/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEndereco(int id)
+        public async Task<IActionResult> DeleteVoo(int id)
         {
-            var endereco = await _context.Endereco.FindAsync(id);
-            if (endereco == null)
+            var voo = await _context.Voo.FindAsync(id);
+            if (voo == null)
             {
                 return NotFound();
             }
 
-            _context.Endereco.Remove(endereco);
+            _context.Voo.Remove(voo);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool EnderecoExists(int id)
+        private bool VooExists(int id)
         {
-            return _context.Endereco.Any(e => e.ID == id);
+            return _context.Voo.Any(e => e.ID == id);
         }
     }
 }

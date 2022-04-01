@@ -12,47 +12,47 @@ namespace AndreAirlinesAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PassageiroesController : ControllerBase
+    public class AeronavesController : ControllerBase
     {
         private readonly AndreAirlinesAPIContext _context;
 
-        public PassageiroesController(AndreAirlinesAPIContext context)
+        public AeronavesController(AndreAirlinesAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Passageiroes
+        // GET: api/Aeronaves
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Passageiro>>> GetPassageiro()
+        public async Task<ActionResult<IEnumerable<Aeronave>>> GetAeronave()
         {
-            return await _context.Passageiro.Include(e => e.Endereco).ToListAsync();
+            return await _context.Aeronave.ToListAsync();
         }
 
-        // GET: api/Passageiroes/5
+        // GET: api/Aeronaves/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Passageiro>> GetPassageiro(string id)
+        public async Task<ActionResult<Aeronave>> GetAeronave(string id)
         {
-            var passageiro = await _context.Passageiro.Include(e => e.Endereco).Where(c => c.CPF == id).FirstOrDefaultAsync();
+            var aeronave = await _context.Aeronave.FindAsync(id);
 
-            if (passageiro == null)
+            if (aeronave == null)
             {
                 return NotFound();
             }
 
-            return passageiro;
+            return aeronave;
         }
 
-        // PUT: api/Passageiroes/5
+        // PUT: api/Aeronaves/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPassageiro(string id, Passageiro passageiro)
+        public async Task<IActionResult> PutAeronave(string id, Aeronave aeronave)
         {
-            if (id != passageiro.CPF)
+            if (id != aeronave.Codigo)
             {
                 return BadRequest();
             }
 
-            _context.Entry(passageiro).State = EntityState.Modified;
+            _context.Entry(aeronave).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace AndreAirlinesAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PassageiroExists(id))
+                if (!AeronaveExists(id))
                 {
                     return NotFound();
                 }
@@ -73,19 +73,19 @@ namespace AndreAirlinesAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Passageiroes
+        // POST: api/Aeronaves
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Passageiro>> PostPassageiro(Passageiro passageiro)
+        public async Task<ActionResult<Aeronave>> PostAeronave(Aeronave aeronave)
         {
-            _context.Passageiro.Add(passageiro);
+            _context.Aeronave.Add(aeronave);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (PassageiroExists(passageiro.CPF))
+                if (AeronaveExists(aeronave.Codigo))
                 {
                     return Conflict();
                 }
@@ -95,28 +95,28 @@ namespace AndreAirlinesAPI.Controllers
                 }
             }
 
-            return CreatedAtAction("GetPassageiro", new { id = passageiro.CPF }, passageiro);
+            return CreatedAtAction("GetAeronave", new { id = aeronave.Codigo }, aeronave);
         }
 
-        // DELETE: api/Passageiroes/5
+        // DELETE: api/Aeronaves/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePassageiro(string id)
+        public async Task<IActionResult> DeleteAeronave(string id)
         {
-            var passageiro = await _context.Passageiro.FindAsync(id);
-            if (passageiro == null)
+            var aeronave = await _context.Aeronave.FindAsync(id);
+            if (aeronave == null)
             {
                 return NotFound();
             }
 
-            _context.Passageiro.Remove(passageiro);
+            _context.Aeronave.Remove(aeronave);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PassageiroExists(string id)
+        private bool AeronaveExists(string id)
         {
-            return _context.Passageiro.Any(e => e.CPF == id);
+            return _context.Aeronave.Any(e => e.Codigo == id);
         }
     }
 }

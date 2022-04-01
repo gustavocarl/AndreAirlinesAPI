@@ -17,5 +17,11 @@ namespace AndreAirlinesAPI.Data
         public DbSet<AndreAirlinesAPI.Model.Endereco> Endereco { get; set; }
 
         public DbSet<AndreAirlinesAPI.Model.Passageiro> Passageiro { get; set; }
+
+        public DbSet<AndreAirlinesAPI.Model.Aeroporto> Aeroporto { get; set; }
+
+        public DbSet<AndreAirlinesAPI.Model.Aeronave> Aeronave { get; set; }
+
+        public DbSet<AndreAirlinesAPI.Model.Voo> Voo { get; set; }
     }
 }

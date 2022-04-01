@@ -12,47 +12,47 @@ namespace AndreAirlinesAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PassageiroesController : ControllerBase
+    public class AeroportoesController : ControllerBase
     {
         private readonly AndreAirlinesAPIContext _context;
 
-        public PassageiroesController(AndreAirlinesAPIContext context)
+        public AeroportoesController(AndreAirlinesAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Passageiroes
+        // GET: api/Aeroportoes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Passageiro>>> GetPassageiro()
+        public async Task<ActionResult<IEnumerable<Aeroporto>>> GetAeroporto()
         {
-            return await _context.Passageiro.Include(e => e.Endereco).ToListAsync();
+            return await _context.Aeroporto.Include(e => e.Endereco).ToListAsync();
         }
 
-        // GET: api/Passageiroes/5
+        // GET: api/Aeroportoes/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Passageiro>> GetPassageiro(string id)
+        public async Task<ActionResult<Aeroporto>> GetAeroporto(string id)
         {
-            var passageiro = await _context.Passageiro.Include(e => e.Endereco).Where(c => c.CPF == id).FirstOrDefaultAsync();
+            var aeroporto = await _context.Aeroporto.Include(e => e.Endereco).Where(s => s.Sigla == id).FirstOrDefaultAsync();
 
-            if (passageiro == null)
+            if (aeroporto == null)
             {
                 return NotFound();
             }
 
-            return passageiro;
+            return aeroporto;
         }
 
-        // PUT: api/Passageiroes/5
+        // PUT: api/Aeroportoes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPassageiro(string id, Passageiro passageiro)
+        public async Task<IActionResult> PutAeroporto(string id, Aeroporto aeroporto)
         {
-            if (id != passageiro.CPF)
+            if (id != aeroporto.Sigla)
             {
                 return BadRequest();
             }
 
-            _context.Entry(passageiro).State = EntityState.Modified;
+            _context.Entry(aeroporto).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace AndreAirlinesAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PassageiroExists(id))
+                if (!AeroportoExists(id))
                 {
                     return NotFound();
                 }
@@ -73,19 +73,19 @@ namespace AndreAirlinesAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Passageiroes
+        // POST: api/Aeroportoes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Passageiro>> PostPassageiro(Passageiro passageiro)
+        public async Task<ActionResult<Aeroporto>> PostAeroporto(Aeroporto aeroporto)
         {
-            _context.Passageiro.Add(passageiro);
+            _context.Aeroporto.Add(aeroporto);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
-                if (PassageiroExists(passageiro.CPF))
+                if (AeroportoExists(aeroporto.Sigla))
                 {
                     return Conflict();
                 }
@@ -95,28 +95,28 @@ namespace AndreAirlinesAPI.Controllers
                 }
             }
 
-            return CreatedAtAction("GetPassageiro", new { id = passageiro.CPF }, passageiro);
+            return CreatedAtAction("GetAeroporto", new { id = aeroporto.Sigla }, aeroporto);
         }
 
-        // DELETE: api/Passageiroes/5
+        // DELETE: api/Aeroportoes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePassageiro(string id)
+        public async Task<IActionResult> DeleteAeroporto(string id)
         {
-            var passageiro = await _context.Passageiro.FindAsync(id);
-            if (passageiro == null)
+            var aeroporto = await _context.Aeroporto.FindAsync(id);
+            if (aeroporto == null)
             {
                 return NotFound();
             }
 
-            _context.Passageiro.Remove(passageiro);
+            _context.Aeroporto.Remove(aeroporto);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool PassageiroExists(string id)
+        private bool AeroportoExists(string id)
         {
-            return _context.Passageiro.Any(e => e.CPF == id);
+            return _context.Aeroporto.Any(e => e.Sigla == id);
         }
     }
 }
