@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreAirlinesAPI.Data;
 using AndreAirlinesAPI.Model;
+using AndreAirlinesAPI.Services;
 
 namespace AndreAirlinesAPI.Controllers
 {
@@ -81,7 +82,20 @@ namespace AndreAirlinesAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Passageiro>> PostPassageiro(Passageiro passageiro)
         {
-
+            var endereco = await ApiCep.ViaCepJsonAsync(passageiro.Endereco.CEP);
+            string logradouro = endereco.Logradouro;
+            string bairro = endereco.Bairro;
+            string localidade = endereco.Localidade;
+            string uf = endereco.Estado;
+            string complemento = endereco.Complemento;
+            //payLoad retorno do serviço
+            
+            passageiro.Endereco.Logradouro = logradouro;
+            passageiro.Endereco.Bairro = bairro;
+            passageiro.Endereco.Localidade = localidade;
+            passageiro.Endereco.Estado = uf;
+            passageiro.Endereco.Complemento = complemento;
+            
             _context.Passageiro.Add(passageiro);
 
             try

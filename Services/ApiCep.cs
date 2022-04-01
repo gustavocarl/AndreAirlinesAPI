@@ -1,29 +1,31 @@
-﻿using System;
+﻿using AndreAirlinesAPI.Model;
+using Newtonsoft.Json;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace AndreAirlinesAPI.Services
 {
-    public class APICorreios
+    public class ApiCep
     {
         static readonly HttpClient client = new HttpClient();
 
-        public static async Task RequisitarServico()
+        public static async Task<Endereco> ViaCepJsonAsync(string cep)
         {
             try
             {
 
-                HttpResponseMessage response = await client.GetAsync("https://viacep.com.br/ws/01001000/json/");
+                HttpResponseMessage response = await client.GetAsync("https://viacep.com.br/ws/" + cep + "/json/");
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(responseBody);
+                var end = JsonConvert.DeserializeObject<Endereco>(responseBody);
+                return end;
+
             }
             catch (HttpRequestException e)
             {
-                Console.WriteLine("\nException Caught!");
-                Console.WriteLine("Message -> " + e.Message);
+                throw;
             }
-
         }
     }
 }

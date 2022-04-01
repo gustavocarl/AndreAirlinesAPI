@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AndreAirlinesAPI.Data;
 using AndreAirlinesAPI.Model;
+using AndreAirlinesAPI.Services;
 
 namespace AndreAirlinesAPI.Controllers
 {
@@ -78,7 +79,20 @@ namespace AndreAirlinesAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Aeroporto>> PostAeroporto(Aeroporto aeroporto)
         {
+            var endereco = await ApiCep.ViaCepJsonAsync(aeroporto.Endereco.CEP);
+            string logradouro = endereco.Logradouro;
+            string bairro = endereco.Bairro;
+            string localidade = endereco.Localidade;
+            string uf = endereco.Estado;
+            string complemento = endereco.Complemento;
+
+            aeroporto.Endereco.Logradouro = logradouro;
+            aeroporto.Endereco.Bairro = bairro;
+            aeroporto.Endereco.Localidade = localidade;
+            aeroporto.Endereco.Estado = uf;
+            aeroporto.Endereco.Complemento = complemento;
             _context.Aeroporto.Add(aeroporto);
+            
             try
             {
                 await _context.SaveChangesAsync();

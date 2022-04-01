@@ -12,11 +12,9 @@ namespace AndreAirlinesAPI.Model
         public int ID { get; set; } 
         [JsonProperty("Logradouro")]
         public string Logradouro { get; set; }
-        [JsonProperty("Numero")]
-        public int Numero { get; set; }
         [JsonProperty("Bairro")]
         public string Bairro { get; set; }
-        [JsonProperty("Cidade")]
+        [JsonProperty("Localidade")]
         public string Localidade { get; set; }
         [JsonProperty("CEP")]
         public string CEP { get; set; }
@@ -24,6 +22,8 @@ namespace AndreAirlinesAPI.Model
         public string Estado { get; set; }
         [JsonProperty("Complemento")]
         public string Complemento { get; set; }
+        [JsonProperty("Numero")]
+        public int Numero { get; set; }
         [JsonProperty("Pais")]
         public string Pais { get; set; }
 
