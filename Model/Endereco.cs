@@ -18,8 +18,8 @@ namespace AndreAirlinesAPI.Model
         public string Localidade { get; set; }
         [JsonProperty("CEP")]
         public string CEP { get; set; }
-        [JsonProperty("Estado")]
-        public string Estado { get; set; }
+        [JsonProperty("uf")]
+        public string UF { get; set; }
         [JsonProperty("Complemento")]
         public string Complemento { get; set; }
         [JsonProperty("Numero")]

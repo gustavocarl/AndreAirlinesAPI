@@ -83,13 +83,13 @@ namespace AndreAirlinesAPI.Controllers
             string logradouro = endereco.Logradouro;
             string bairro = endereco.Bairro;
             string localidade = endereco.Localidade;
-            string uf = endereco.Estado;
+            string uf = endereco.UF;
             string complemento = endereco.Complemento;
 
             aeroporto.Endereco.Logradouro = logradouro;
             aeroporto.Endereco.Bairro = bairro;
             aeroporto.Endereco.Localidade = localidade;
-            aeroporto.Endereco.Estado = uf;
+            aeroporto.Endereco.UF = uf;
             aeroporto.Endereco.Complemento = complemento;
             _context.Aeroporto.Add(aeroporto);
             

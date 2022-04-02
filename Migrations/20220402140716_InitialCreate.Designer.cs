@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AndreAirlinesAPI.Migrations
 {
     [DbContext(typeof(AndreAirlinesAPIContext))]
-    [Migration("20220401142412_InitialCreate")]
+    [Migration("20220402140716_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,9 +71,6 @@ namespace AndreAirlinesAPI.Migrations
                     b.Property<string>("Complemento")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Estado")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Localidade")
                         .HasColumnType("nvarchar(max)");
 
@@ -84,6 +81,9 @@ namespace AndreAirlinesAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Pais")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UF")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
