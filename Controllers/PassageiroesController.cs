@@ -35,9 +35,6 @@ namespace AndreAirlinesAPI.Controllers
         {
             var passageiro = await _context.Passageiro.Include(e => e.Endereco).FirstOrDefaultAsync();
 
-            //var address = _context.Endereco.Where(x => x.ID == passageiro.EnderecoID).FirstOrDefaultAsync();
-            //Endereco Id = address;
-
             if (passageiro == null)
             {
                 return NotFound();

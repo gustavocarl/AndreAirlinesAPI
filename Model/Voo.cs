@@ -18,5 +18,20 @@ namespace AndreAirlinesAPI.Model
         public virtual Passageiro CPF { get; set; }
 
         #endregion
+
+        #region Sobrescrita
+
+        public override string ToString()
+        {
+            return $"\nID: {ID} " +
+                $"\nDestino: {SiglaDestino.Sigla} " +
+                $"\nOrigem: {SiglaOrigem.Sigla} " +
+                $"\nCodigo Aeronave: {CodigoAeronave.Codigo} " +
+                $"\nHorario Embarque: {HorarioEmbarque.ToString("dd/MM/yyyy").Replace("-", "/")} " +
+                $"\nHorario Desembarque: {HorarioDesembarque.ToString("dd/MM/yyyy").Replace("-", "/")} " +
+                $"\nCPF: {CPF.CPF}\n";
+        }
+
+        #endregion
     }
 }
