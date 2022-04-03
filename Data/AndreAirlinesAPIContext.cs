@@ -27,5 +27,6 @@ namespace AndreAirlinesAPI.Data
         public DbSet<AndreAirlinesAPI.Model.Classe> Classe { get; set; }
 
         public DbSet<AndreAirlinesAPI.Model.Passagem> Passagem { get; set; }
+
     }
 }

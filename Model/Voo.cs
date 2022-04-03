@@ -12,7 +12,7 @@ namespace AndreAirlinesAPI.Model
         [Key]
         [JsonProperty("ID")]
         public int ID { get; set; }
-        [JsonProperty("SiglaDestino")]
+        [JsonProperty("Destino")]
         public virtual Aeroporto Destino { get; set; }
         [JsonProperty("Origem")]
         public virtual Aeroporto Origem { get; set; }
