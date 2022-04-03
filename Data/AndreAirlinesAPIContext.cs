@@ -14,21 +14,21 @@ namespace AndreAirlinesAPI.Data
         {
         }
 
-        public DbSet<AndreAirlinesAPI.Model.Endereco> Endereco { get; set; }
+        public DbSet<Endereco> Endereco { get; set; }
 
-        public DbSet<AndreAirlinesAPI.Model.Passageiro> Passageiro { get; set; }
+        public DbSet<Passageiro> Passageiro { get; set; }
 
-        public DbSet<AndreAirlinesAPI.Model.Aeroporto> Aeroporto { get; set; }
+        public DbSet<Aeroporto> Aeroporto { get; set; }
 
-        public DbSet<AndreAirlinesAPI.Model.Aeronave> Aeronave { get; set; }
+        public DbSet<Aeronave> Aeronave { get; set; }
 
-        public DbSet<AndreAirlinesAPI.Model.Voo> Voo { get; set; }
+        public DbSet<Voo> Voo { get; set; }
 
-        public DbSet<AndreAirlinesAPI.Model.Classe> Classe { get; set; }
+        public DbSet<Classe> Classe { get; set; }
 
-        public DbSet<AndreAirlinesAPI.Model.Passagem> Passagem { get; set; }
+        public DbSet<Passagem> Passagem { get; set; }
 
-        public DbSet<AndreAirlinesAPI.Model.PrecoBase> PrecoBase { get; set; }
+        public DbSet<PrecoBase> PrecoBase { get; set; }
 
     }
 }

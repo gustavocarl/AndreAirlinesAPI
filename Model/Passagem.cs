@@ -8,14 +8,24 @@ namespace AndreAirlinesAPI.Model
     public class Passagem
     {
         #region Propriedades
+
         [Key]
         [JsonProperty("ID")]
         public int Id { get; set; }
+        
         [JsonProperty("Passageiro")]
         public Passageiro Passageiro { get; set; }
+        
+        [JsonProperty("Voo")]
+        public Voo Voo { get; set; }
+
         [JsonProperty("Valor")]
         [Column(TypeName = "decimal(10,2)")]
-        public PrecoBase PrecoBase { get; set; } //Traz Classe, ValorPassagem, Origem e Destino
+        public decimal Valor { get; set; }
+        
+        [JsonProperty("Classe")]
+        public Classe Classe { get; set; }
+        
         [JsonProperty("DataCadastro")]
         public DateTime DataCadastro { get; set; }
 

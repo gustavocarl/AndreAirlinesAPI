@@ -4,14 +4,16 @@ using AndreAirlinesAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AndreAirlinesAPI.Migrations
 {
     [DbContext(typeof(AndreAirlinesAPIContext))]
-    partial class AndreAirlinesAPIContextModelSnapshot : ModelSnapshot
+    [Migration("20220403184617_InitialCreatev2")]
+    partial class InitialCreatev2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -150,16 +152,11 @@ namespace AndreAirlinesAPI.Migrations
                     b.Property<decimal>("Valor")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<int?>("VooID")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ClasseId");
 
                     b.HasIndex("PassageiroCPF");
-
-                    b.HasIndex("VooID");
 
                     b.ToTable("Passagem");
                 });
@@ -261,15 +258,9 @@ namespace AndreAirlinesAPI.Migrations
                         .WithMany()
                         .HasForeignKey("PassageiroCPF");
 
-                    b.HasOne("AndreAirlinesAPI.Model.Voo", "Voo")
-                        .WithMany()
-                        .HasForeignKey("VooID");
-
                     b.Navigation("Classe");
 
                     b.Navigation("Passageiro");
-
-                    b.Navigation("Voo");
                 });
 
             modelBuilder.Entity("AndreAirlinesAPI.Model.PrecoBase", b =>
