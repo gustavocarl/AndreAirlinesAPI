@@ -36,7 +36,6 @@ namespace AndreAirlinesAPI.Model
                 $"\nCodigo Aeronave: {CodigoAeronave.Codigo} " +
                 $"\nHorario Embarque: {HorarioEmbarque.ToString("dd/MM/yyyy").Replace("-", "/")} " +
                 $"\nHorario Desembarque: {HorarioDesembarque.ToString("dd/MM/yyyy").Replace("-", "/")} ";
-                //$"\nCPF: {CPF.CPF}\n";
         }
 
         #endregion

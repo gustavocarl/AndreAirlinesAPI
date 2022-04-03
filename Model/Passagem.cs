@@ -11,15 +11,11 @@ namespace AndreAirlinesAPI.Model
         [Key]
         [JsonProperty("ID")]
         public int Id { get; set; }
-        //[JsonProperty("Voo")]
-        //public Voo Voo { get; set; }
         [JsonProperty("Passageiro")]
         public Passageiro Passageiro { get; set; }
         [JsonProperty("Valor")]
         [Column(TypeName = "decimal(10,2)")]
-        public decimal Valor { get; set; }
-        [JsonProperty("Classe")]
-        public virtual Classe Classe { get; set; }
+        public PrecoBase PrecoBase { get; set; } //Traz Classe, ValorPassagem, Origem e Destino
         [JsonProperty("DataCadastro")]
         public DateTime DataCadastro { get; set; }
 

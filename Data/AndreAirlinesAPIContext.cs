@@ -28,5 +28,7 @@ namespace AndreAirlinesAPI.Data
 
         public DbSet<AndreAirlinesAPI.Model.Passagem> Passagem { get; set; }
 
+        public DbSet<AndreAirlinesAPI.Model.PrecoBase> PrecoBase { get; set; }
+
     }
 }
