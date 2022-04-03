@@ -12,17 +12,21 @@ namespace AndreAirlinesAPI.Model
         [Key]
         [JsonProperty("ID")]
         public int ID { get; set; }
+
         [JsonProperty("Destino")]
         public virtual Aeroporto Destino { get; set; }
+
         [JsonProperty("Origem")]
         public virtual Aeroporto Origem { get; set; }
+
         [JsonProperty("CodigoAeronave")]
         public virtual Aeronave CodigoAeronave { get; set; }
+
         [JsonProperty("HorarioEmbarque")]
         public DateTime HorarioEmbarque { get; set; }
+
         [JsonProperty("HorarioDesembarque")]
         public DateTime HorarioDesembarque { get; set; }
-        //public virtual Passageiro CPF { get; set; }
 
         #endregion
 

@@ -12,20 +12,26 @@ namespace AndreAirlinesAPI.Model
         [Key]
         [JsonProperty("ID")]
         public int Id { get; set; }
-        
+
         [JsonProperty("Passageiro")]
         public Passageiro Passageiro { get; set; }
-        
+
         [JsonProperty("Voo")]
         public Voo Voo { get; set; }
 
         [JsonProperty("Valor")]
         [Column(TypeName = "decimal(10,2)")]
         public decimal Valor { get; set; }
-        
+
+        [JsonProperty("PromocaoPorcentagem")]
+        public double PromocaoPorcentagem { get; set; }
+
+        [JsonProperty("ValorTotal")]
+        public decimal ValorTotal => (Valor - ((decimal)PromocaoPorcentagem / 100) * Valor);
+
         [JsonProperty("Classe")]
         public Classe Classe { get; set; }
-        
+
         [JsonProperty("DataCadastro")]
         public DateTime DataCadastro { get; set; }
 

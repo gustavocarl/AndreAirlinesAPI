@@ -10,8 +10,10 @@ namespace AndreAirlinesAPI.Model
         [Key]
         [JsonProperty("Codigo")]
         public string Codigo { get; set; }
+
         [JsonProperty("Nome")]
         public string Nome { get; set; }
+
         [JsonProperty("Capacidade")]
         public int Capacidade { get; set; }
 

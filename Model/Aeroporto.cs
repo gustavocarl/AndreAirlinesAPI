@@ -11,8 +11,10 @@ namespace AndreAirlinesAPI.Model
         [Key]
         [JsonProperty("Sigla")]
         public string Sigla { get; set; }
+
         [JsonProperty("Nome")]
         public string Nome { get; set; }
+
         [JsonProperty("Endereco")]
         public virtual Endereco Endereco { get; set; }
 
