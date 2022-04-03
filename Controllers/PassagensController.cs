@@ -12,47 +12,47 @@ namespace AndreAirlinesAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EnderecoesController : ControllerBase
+    public class PassagensController : ControllerBase
     {
         private readonly AndreAirlinesAPIContext _context;
 
-        public EnderecoesController(AndreAirlinesAPIContext context)
+        public PassagensController(AndreAirlinesAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Enderecoes
+        // GET: api/Passagens
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Endereco>>> GetEndereco()
+        public async Task<ActionResult<IEnumerable<Passagem>>> GetPassagem()
         {
-            return await _context.Endereco.ToListAsync();
+            return await _context.Passagem.ToListAsync();
         }
 
-        // GET: api/Enderecoes/5
+        // GET: api/Passagens/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Endereco>> GetEndereco(int id)
+        public async Task<ActionResult<Passagem>> GetPassagem(int id)
         {
-            var endereco = await _context.Endereco.FindAsync(id);
+            var passagem = await _context.Passagem.FindAsync(id);
 
-            if (endereco == null)
+            if (passagem == null)
             {
                 return NotFound();
             }
 
-            return endereco;
+            return passagem;
         }
 
-        // PUT: api/Enderecoes/5
+        // PUT: api/Passagens/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEndereco(int id, Endereco endereco)
+        public async Task<IActionResult> PutPassagem(int id, Passagem passagem)
         {
-            if (id != endereco.ID)
+            if (id != passagem.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(endereco).State = EntityState.Modified;
+            _context.Entry(passagem).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace AndreAirlinesAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!EnderecoExists(id))
+                if (!PassagemExists(id))
                 {
                     return NotFound();
                 }
@@ -73,36 +73,36 @@ namespace AndreAirlinesAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Enderecoes
+        // POST: api/Passagens
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Endereco>> PostEndereco(Endereco endereco)
+        public async Task<ActionResult<Passagem>> PostPassagem(Passagem passagem)
         {
-            _context.Endereco.Add(endereco);
+            _context.Passagem.Add(passagem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEndereco", new { id = endereco.ID }, endereco);
+            return CreatedAtAction("GetPassagem", new { id = passagem.Id }, passagem);
         }
 
-        // DELETE: api/Enderecoes/5
+        // DELETE: api/Passagens/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteEndereco(int id)
+        public async Task<IActionResult> DeletePassagem(int id)
         {
-            var endereco = await _context.Endereco.FindAsync(id);
-            if (endereco == null)
+            var passagem = await _context.Passagem.FindAsync(id);
+            if (passagem == null)
             {
                 return NotFound();
             }
 
-            _context.Endereco.Remove(endereco);
+            _context.Passagem.Remove(passagem);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool EnderecoExists(int id)
+        private bool PassagemExists(int id)
         {
-            return _context.Endereco.Any(e => e.ID == id);
+            return _context.Passagem.Any(e => e.Id == id);
         }
     }
 }

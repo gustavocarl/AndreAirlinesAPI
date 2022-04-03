@@ -13,11 +13,11 @@ namespace AndreAirlinesAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PassageiroesController : ControllerBase
+    public class PassageirosController : ControllerBase
     {
         private readonly AndreAirlinesAPIContext _context;
 
-        public PassageiroesController(AndreAirlinesAPIContext context)
+        public PassageirosController(AndreAirlinesAPIContext context)
         {
             _context = context;
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,13 +10,19 @@ namespace AndreAirlinesAPI.Model
         #region Propriedades
 
         [Key]
+        [JsonProperty("ID")]
         public int ID { get; set; }
-        public virtual Aeroporto SiglaDestino { get; set; }
-        public virtual Aeroporto SiglaOrigem { get; set; }
+        [JsonProperty("SiglaDestino")]
+        public virtual Aeroporto Destino { get; set; }
+        [JsonProperty("Origem")]
+        public virtual Aeroporto Origem { get; set; }
+        [JsonProperty("CodigoAeronave")]
         public virtual Aeronave CodigoAeronave { get; set; }
+        [JsonProperty("HorarioEmbarque")]
         public DateTime HorarioEmbarque { get; set; }
+        [JsonProperty("HorarioDesembarque")]
         public DateTime HorarioDesembarque { get; set; }
-        public virtual Passageiro CPF { get; set; }
+        //public virtual Passageiro CPF { get; set; }
 
         #endregion
 
@@ -24,12 +31,12 @@ namespace AndreAirlinesAPI.Model
         public override string ToString()
         {
             return $"\nID: {ID} " +
-                $"\nDestino: {SiglaDestino.Sigla} " +
-                $"\nOrigem: {SiglaOrigem.Sigla} " +
+                $"\nDestino: {Destino.Sigla} " +
+                $"\nOrigem: {Origem.Sigla} " +
                 $"\nCodigo Aeronave: {CodigoAeronave.Codigo} " +
                 $"\nHorario Embarque: {HorarioEmbarque.ToString("dd/MM/yyyy").Replace("-", "/")} " +
-                $"\nHorario Desembarque: {HorarioDesembarque.ToString("dd/MM/yyyy").Replace("-", "/")} " +
-                $"\nCPF: {CPF.CPF}\n";
+                $"\nHorario Desembarque: {HorarioDesembarque.ToString("dd/MM/yyyy").Replace("-", "/")} ";
+                //$"\nCPF: {CPF.CPF}\n";
         }
 
         #endregion

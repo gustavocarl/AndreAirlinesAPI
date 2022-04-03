@@ -9,6 +9,7 @@ namespace AndreAirlinesAPI.Model
     {
         #region Propriedades
         [Key]
+        [JsonProperty("ID")]
         public int ID { get; set; } 
         [JsonProperty("Logradouro")]
         public string Logradouro { get; set; }
